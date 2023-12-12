@@ -22,7 +22,14 @@ export default ({ mode }) => {
 	return defineConfig({
 		base: VITE_BASE_URL,
 		plugins: [
-			vue(),
+			vue({
+				template: {
+					compilerOptions: {
+						// treat all tags with a dash as custom elements
+						isCustomElement: tag => tag.includes('-'),
+					},
+				},
+			}),
 			UnoCSS({
 				shortcuts: [
 					{ logo: 'i-logos-vue w-6em h-6em transform transition-800' },

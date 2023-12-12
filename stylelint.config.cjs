@@ -1,6 +1,6 @@
 module.exports = {
 	root: true,
-	plugins: ['stylelint-order', 'stylelint-less'],
+	plugins: ['stylelint-order'],
 	extends: [
 		'stylelint-config-standard', // The standard shareable config for Stylelint
 		'stylelint-config-html/html', // The shareable html config for Stylelint.

@@ -13,7 +13,8 @@
 		"types": [
 			"vitest",
 			"vite/client",
-			"unplugin-icons/types/vue"
+			"unplugin-icons/types/vue",
+			"@nordhealth/vue"
 		],
 		"allowJs": true,
 		"strict": true,
@@ -31,12 +32,12 @@
 		]
 	},
 	"include": [
-    "vite.config.*",
-    "env.d.ts",
-    "src/**/*",
-    "src/**/*.vue",
-    "components.d.ts",
-    "auto-imports.d.ts"
-  ],
+		"vite.config.*",
+		"env.d.ts",
+		"src/**/*",
+		"src/**/*.vue",
+		"components.d.ts",
+		"auto-imports.d.ts"
+	],
 	"exclude": ["dist", "node_modules", "cypress"]
 }
