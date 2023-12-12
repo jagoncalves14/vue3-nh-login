@@ -1,22 +1,22 @@
 {
-	"name": "vue-vite-ts-starter-template",
+	"name": "vue3-nh-login",
 	"type": "module",
 	"version": "0.0.0",
 	"packageManager": "pnpm@8.10.5",
-	"description": "Vue3 TypeScript Starter Project with Vite.",
+	"description": "Vue3 NH Login Page.",
 	"author": {
 		"name": "jagoncalves14",
 		"email": "joaoandretgoncalves@gmail.com",
 		"url": "https://joao-goncalves.com"
 	},
 	"license": "MIT",
-	"homepage": "https://github.com/jagoncalves14/vue-vite-ts-starter-template",
+	"homepage": "https://github.com/jagoncalves14/vue3-nh-login",
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:jagoncalves14/vue-vite-ts-starter-template.git"
+		"url": "git@github.com:jagoncalves14/vue3-nh-login.git"
 	},
 	"bugs": {
-		"url": "https://github.com/jagoncalves14/vue-vite-ts-starter-template/issues"
+		"url": "https://github.com/jagoncalves14/vue3-nh-login/issues"
 	},
 	"engines": {
 		"node": ">=20.0.0",
@@ -35,6 +35,7 @@
 	"dependencies": {
 		"@nordhealth/components": "^3.6.2",
 		"@nordhealth/css": "^3.1.1",
+		"@supabase/supabase-js": "^2.39.0",
 		"@vueuse/core": "^10.7.0",
 		"pinia": "^2.1.7",
 		"vue": "^3.3.11",

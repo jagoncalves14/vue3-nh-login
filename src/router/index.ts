@@ -1,5 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from '@/store/modules/auth'
+import pinia from '@/store'
 
 // Import all routing modules in router/modules folder
 const files = import.meta.glob('./modules/*.ts', {
@@ -34,6 +36,40 @@ const router = createRouter({
 			behavior: 'smooth',
 		}
 	},
+})
+
+const { supabase } = useAuthStore(pinia)
+supabase.auth.onAuthStateChange((event) => {
+	if (event === 'SIGNED_OUT') {
+		router.push('/sign-in')
+	}
+
+	if (event === 'SIGNED_IN') {
+		const routeName = router.currentRoute.value.name
+
+		if (routeName === 'callback') {
+			setTimeout(() => {
+				router.push({ name: 'home' })
+			}, 0)
+		}
+	}
+})
+
+router.beforeEach(async (to) => {
+	const { supabase } = useAuthStore()
+	const { data } = await supabase.auth.getUser()
+
+	if (to.meta.requiresAuth && await !data.user) {
+		return {
+			path: '/sign-in',
+		}
+	}
+
+	if (to.meta.requiresNoAuth && await data.user) {
+		return {
+			path: '/',
+		}
+	}
 })
 
 export default router

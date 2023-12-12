@@ -1,4 +1,4 @@
-<h1 align="center"><a href="https://github.com/jagoncalve14/vue-vite-ts-starter-template" target="_blank">Vite 5 🚀 - Vue 3  Starter Template</a></h1>
+<h1 align="center"><a href="https://github.com/jagoncalve14/vue3-nh-login" target="_blank">Vite 5 🚀 - Vue 3  Starter Template</a></h1>
 
 <p align="center">
   <a href="https://nodejs.org/en/about/releases/">
@@ -16,13 +16,13 @@
   <a href="https://github.com/vuejs/pinia">
     <img src="https://img.shields.io/badge/pinia-2.1.7-brightgreen.svg" alt="pinia" />
   </a>
-  <a href="https://github.com/jagoncalves14/vue-vite-ts-starter-template/blob/master/LICENSE">
-    <img alt="LICENSE" src="https://img.shields.io/github/license/jagoncalves14/vue-vite-ts-starter-template.svg" />
+  <a href="https://github.com/jagoncalves14/vue3-nh-login/blob/master/LICENSE">
+    <img alt="LICENSE" src="https://img.shields.io/github/license/jagoncalves14/vue3-nh-login.svg" />
   </a>
 </p>
 
 <p align='center'>
-  <b>Vite5</b> + <b>Vue3</b> + <b>TypeScript</b> + <b>Vue Router</b> + <b>Pinia</b> + <b>ESLint + Stylelint</b>
+  <b>Vite5</b> + <b>Vue3</b> + <b>TypeScript</b> + <b>Vue Router</b> + <b>Pinia</b> + <b>Supabase</b> + <b>UnoCSS</b> + <b>ESLint + Stylelint</b>
 </p>
 
 ## Features
@@ -31,6 +31,9 @@
 - 🖖 [Vue 3](https://github.com/vuejs/core) - Composition API and `<script setup>`
 - 🚦 [Vue Router](https://github.com/vuejs/router) - The official router for Vue.js.
 - 📦 [Pinia](https://github.com/vuejs/pinia) - Intuitive, type safe and flexible Store for Vue
+- 🎨 [UnoCSS](https://github.com/unocss/unocss) - The instant on-demand atomic CSS engine
+- 🧱 [Nordhealth Design System](https://nordhealth.design/) - Web Components for building the UI
+- 🔗 [Supabase](https://github.com/supabase/supabase) - The open source Firebase alternative
 - 📥 [APIs auto importing](https://github.com/antfu/unplugin-auto-import) - Use Composition API and others directly
 - 😃 [Icons auto install](https://github.com/unplugin/unplugin-icons) - Access thousands of icons as components on-demand universally.
 - 🧰 [Husky](https://typicode.github.io/husky/#/) + [Lint-Staged](https://github.com/okonet/lint-staged) - Git Hook Tools
@@ -55,11 +58,11 @@
 
 ## Try it now
 
-> Vite5 Vue3 TypeScript Starter Template requires Node >= 20.00
+> Requires Node >= 20.00
 
 ### GitHub Template
 
-[Create a repo from this template on GitHub](https://github.com/jagoncalves14/vue-vite-ts-starter-template/generate).
+[Create a repo from this template on GitHub](https://github.com/jagoncalves14/vue3-nh-login/generate).
 
 ### Clone to local
 
@@ -70,10 +73,10 @@ If you prefer to do it manually with the cleaner git history
 git config --global core.autocrlf input
 
 # clone repository
-git clone https://github.com/jagoncalves14/vue-vite-ts-starter-template
+git clone https://github.com/jagoncalves14/vue3-nh-login
 
-# open folder vue-vite-ts-starter-template
-cd vue-vite-ts-starter-template
+# open folder vue3-nh-login
+cd vue3-nh-login
 
 # install packages
 npm i
