@@ -1,0 +1,93 @@
+{
+	"name": "vue-vite-ts-starter-template",
+	"type": "module",
+	"version": "0.0.0",
+	"packageManager": "pnpm@8.10.5",
+	"description": "Vue3 TypeScript Starter Project with Vite.",
+	"author": {
+		"name": "jagoncalves14",
+		"email": "joaoandretgoncalves@gmail.com",
+		"url": "https://joao-goncalves.com"
+	},
+	"license": "MIT",
+	"homepage": "https://github.com/jagoncalves14/vue-vite-ts-starter-template",
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:jagoncalves14/vue-vite-ts-starter-template.git"
+	},
+	"bugs": {
+		"url": "https://github.com/jagoncalves14/vue-vite-ts-starter-template/issues"
+	},
+	"engines": {
+		"node": ">=20.0.0",
+		"pnpm": ">=8.6.10"
+	},
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"lint": "eslint \"{src,mock}/**/*.{vue,js,ts,tsx}\"",
+		"lint:fix": "eslint \"{src,mock}/**/*.{vue,js,ts,tsx}\" --fix",
+		"stylelint": "stylelint \"**/*.{html,vue,css,less}\" --cache",
+		"stylelint:fix": "stylelint \"**/*.{html,vue,css,less}\" --cache --fix",
+		"prepare": "husky install"
+	},
+	"dependencies": {
+		"@vueuse/core": "^10.7.0",
+		"pinia": "^2.1.7",
+		"vue": "^3.3.11",
+		"vue-router": "^4.2.5"
+	},
+	"devDependencies": {
+		"@antfu/eslint-config": "^2.4.5",
+		"@commitlint/cli": "^18.4.3",
+		"@commitlint/config-conventional": "^18.4.3",
+		"@iconify/json": "^2.2.156",
+		"@unocss/eslint-plugin": "^0.58.0",
+		"@unocss/postcss": "^0.58.0",
+		"@unocss/preset-icons": "^0.58.0",
+		"@unocss/preset-wind": "^0.58.0",
+		"@vitejs/plugin-vue": "^4.5.0",
+		"autoprefixer": "^10.4.16",
+		"cz-git": "^1.8.0",
+		"eslint": "^8.55.0",
+		"eslint-plugin-antfu": "^2.0.0",
+		"eslint-plugin-format": "^0.1.0",
+		"husky": "^8.0.3",
+		"lint-staged": "^15.2.0",
+		"postcss-html": "^1.5.0",
+		"stylelint": "^16.0.2",
+		"stylelint-config-recess-order": "^4.4.0",
+		"stylelint-config-recommended-vue": "^1.5.0",
+		"stylelint-config-standard-less": "^2.0.0",
+		"unocss": "^0.58.0",
+		"unplugin-auto-import": "^0.17.2",
+		"unplugin-icons": "^0.18.1",
+		"unplugin-vue-components": "^0.26.0",
+		"vite": "^5.0.8",
+		"vitest": "^1.0.4"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged",
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+		}
+	},
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx}": [
+			"eslint --fix"
+		],
+		"*.vue": [
+			"eslint --fix",
+			"stylelint --fix"
+		],
+		"*.{html,sass,scss,less}": [
+			"stylelint --fix"
+		]
+	},
+	"config": {
+		"commitizen": {
+			"path": "node_modules/cz-git"
+		}
+	}
+}

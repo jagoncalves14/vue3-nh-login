@@ -1,0 +1,10 @@
+# Ignore directory
+node_modules/
+build/
+dist/
+public/
+
+# Ignore file
+**/*.min.css
+**/*-min.css
+**/*.bundle.css

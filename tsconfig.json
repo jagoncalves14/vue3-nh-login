@@ -1,0 +1,42 @@
+{
+	"compilerOptions": {
+		"target": "esnext",
+		"jsx": "preserve",
+		"lib": ["dom", "esnext"],
+		"baseUrl": ".",
+		"module": "esnext",
+		"moduleResolution": "node",
+		"paths": {
+			"@/*": ["src/*"]
+		},
+		"resolveJsonModule": true,
+		"types": [
+			"vitest",
+			"vite/client",
+			"unplugin-icons/types/vue"
+		],
+		"allowJs": true,
+		"strict": true,
+		"strictNullChecks": true,
+		"noUnusedLocals": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
+		"skipLibCheck": true
+	},
+	"vueCompilerOptions": {
+		"plugins": [
+			"@vue-macros/volar/define-models",
+			"@vue-macros/volar/define-slots"
+		]
+	},
+	"include": [
+    "vite.config.*",
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.vue",
+    "components.d.ts",
+    "auto-imports.d.ts"
+  ],
+	"exclude": ["dist", "node_modules", "cypress"]
+}
