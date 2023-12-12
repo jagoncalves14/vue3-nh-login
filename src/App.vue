@@ -1,10 +1,10 @@
 <template>
 	<div class="min-h-full">
-		<header class="border-gray-200 bg-white px-4 py-2.5 lg:px-6">
+		<header class="border-gray-200 bg-white px-4 py-2">
 			<div class="mx-auto max-w-screen-xl flex flex-wrap items-center justify-between">
 				<div class="flex items-center">
-					<RouterLink to="/" class="block border-0 border-none p-0 px-4 py-2 text-base text-gray-700 no-underline hover:bg-transparent hover:text-green-700">
-						<img alt="Vue logo" src="@/assets/logo.svg" width="65" height="65">
+					<RouterLink to="/" class="block border-0 border-none p-0 px-4 py-1 text-base text-gray-700 no-underline hover:bg-transparent hover:text-green-700">
+						<img alt="Vue logo" src="@/assets/logo.svg" width="50" height="50">
 					</RouterLink>
 				</div>
 
