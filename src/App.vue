@@ -43,7 +43,7 @@ async function handleSignOut() {
 				</div>
 
 				<div v-if="!isLoading && currentRouteName" class="w-auto flex items-center justify-between">
-					<ul class="mt-4 flex flex-col list-none font-medium lg:mt-0 lg:flex-row lg:space-x-8">
+					<ul class="flex flex-row list-none font-medium space-x-8">
 						<template v-if="session">
 							<li>
 								<RouterLink v-slot="{ isActive }" to="/" class="no-underline">

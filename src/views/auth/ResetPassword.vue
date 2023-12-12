@@ -68,7 +68,7 @@ async function handleSubmit() {
 					<nord-stack gap="m" direction="vertical" align-items="stretch">
 						<nord-input
 							v-model="formData.password"
-							label="Username"
+							label="Password"
 							expand
 							required
 							hide-required
