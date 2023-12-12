@@ -1,4 +1,4 @@
-<h1 align="center"><a href="https://github.com/jagoncalve14/vue3-nh-login" target="_blank">Vite 5 🚀 - Vue 3  Starter Template</a></h1>
+<h1 align="center"><a href="https://github.com/jagoncalve14/vue3-nh-login" target="_blank">Vite 5 + Vue 3 + Supabase + Nordhealth Design System</a></h1>
 
 <p align="center">
   <a href="https://nodejs.org/en/about/releases/">
@@ -22,7 +22,7 @@
 </p>
 
 <p align='center'>
-  <b>Vite5</b> + <b>Vue3</b> + <b>TypeScript</b> + <b>Vue Router</b> + <b>Pinia</b> + <b>Supabase</b> + <b>UnoCSS</b> + <b>ESLint + Stylelint</b>
+  <b>Vite5</b> + <b>Vue3</b> + <b>TypeScript</b> + <b>Vue Router</b> + <b>Pinia</b> + <b>Supabase</b> + <b>UnoCSS</b> + <b>Nordhealth Design System</b> + <b>ESLint + Stylelint</b>
 </p>
 
 <p align='center'>
