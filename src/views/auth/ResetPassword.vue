@@ -1,36 +1,16 @@
 <script lang="ts" setup>
-import type { UserAttributes } from '@supabase/supabase-js'
 import type { ResetPasswordSchemaErrorsType, ResetPasswordSchemaType } from '@/schemas/auth'
 import { ResetPasswordSchema } from '@/schemas/auth'
-import { useAuthStore } from '@/store/modules/auth'
+import resetPassword from '@/api/auth/auth.reset-password'
+import getAccessToken from '@/utils/getAccessToken'
 
-const { supabase } = useAuthStore()
 const router = useRouter()
-const route = useRoute()
 
-// Parse the route hash into a dictionary so we can pick out the access_token provided
-function getResetToken(): UserAttributes {
-	const hashDictionary = {} as Record<string, string | UserAttributes>
-
-	// First remove the actual '#' character
-	const hash = route.hash.replace('#', '')
-
-	// Split hash into key-value pairs
-	hash.split('&').forEach((item) => {
-		// Split 'key=value' into [key, value]
-		const [key, value] = item.split('=')
-		// Add to results
-		Object.assign(hashDictionary, { [key]: value })
-	})
-
-	return hashDictionary?.access_token as UserAttributes
-}
-
+const isLoading = ref(false)
 const formErrors = ref<ResetPasswordSchemaErrorsType>(null)
 const formData = ref<ResetPasswordSchemaType>({
 	password: '',
 })
-const isLoading = ref(false)
 
 async function handleSubmit() {
 	isLoading.value = true
@@ -42,11 +22,10 @@ async function handleSubmit() {
 		return
 	}
 
-	const resetToken = getResetToken()
-	const { error } = await supabase.auth.updateUser(resetToken)
+	const accessToken = getAccessToken()
+	const { error } = await resetPassword(accessToken)
 
 	if (error) {
-		// eslint-disable-next-line no-alert
 		alert(error.message)
 	} else {
 		router.push('/')

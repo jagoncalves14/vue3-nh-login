@@ -1,9 +1,7 @@
 <script lang="ts" setup>
+import forgotPassword from '@/api/auth/auth.forgot-password'
 import type { ForgotPasswordSchemaErrorsType, ForgotPasswordSchemaType } from '@/schemas/auth'
 import { ForgotPasswordSchema } from '@/schemas/auth'
-import { useAuthStore } from '@/store/modules/auth'
-
-const { supabase } = useAuthStore()
 
 const isLoading = ref(false)
 
@@ -22,22 +20,15 @@ async function handleSubmit() {
 		return
 	}
 
-	const { data, error } = await supabase.auth.resetPasswordForEmail(
-		formData.value.email,
-		{
-			redirectTo: `${window.location.origin}/reset-password`,
-		},
-	)
+	const { data, error } = await forgotPassword(formData.value.email)
 
 	if (data) {
-		// eslint-disable-next-line no-alert
 		alert(`
       Password reset link has been sent to your email.
       Please check your inbox.
       If you don't see it, please also check your spam folder.
     `)
 	} else if (error) {
-		// eslint-disable-next-line no-alert
 		alert(error.message)
 	}
 

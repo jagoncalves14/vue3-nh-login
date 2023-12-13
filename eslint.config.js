@@ -12,6 +12,7 @@ export default antfu(
 		typescript: true,
 		vue: true,
 		rules: {
+			'no-alert': 'off',
 			'semi': 'off',
 			'@typescript-eslint/semi': 'off',
 			'curly': ['error', 'multi-line'],

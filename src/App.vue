@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import signOut from './api/auth/auth.sign-out'
+import { supabase } from '@/utils/supabase'
 import { useAuthStore } from '@/store/modules/auth'
 import '@nordhealth/components/lib/Button'
-import { supabase } from '@/utils/supabase'
 
 const authStore = useAuthStore()
 const { session } = storeToRefs(authStore)
@@ -16,19 +17,32 @@ onMounted(async () => {
 	isLoading.value = true
 
 	const { data } = await supabase.auth.getSession()
-	session.value = data.session as any
+	session.value = data.session
 
 	isLoading.value = false
 
-	supabase.auth.onAuthStateChange((_, newSession: any) => {
+	supabase.auth.onAuthStateChange((_, newSession) => {
 		session.value = newSession
 	})
 })
 
 async function handleSignOut() {
 	isLoading.value = true
-	await authStore.signOut()
-	isLoading.value = false
+
+	try {
+		const { error } = await signOut()
+		session.value = null
+
+		if (error) {
+			throw error
+		}
+	} catch (error) {
+		if (error instanceof Error) {
+			alert(error.message)
+		}
+	} finally {
+		isLoading.value = false
+	}
 }
 </script>
 
@@ -36,7 +50,7 @@ async function handleSignOut() {
 	<div class="min-h-full flex flex-col">
 		<header class="border-gray-200 bg-white px-4 py-2 shadow">
 			<div class="mx-auto max-w-screen-xl flex flex-wrap items-center justify-between">
-				<div class="flex items-center">
+				<div class="flex items-center py-2">
 					<RouterLink to="/" class="block hover:opacity-80">
 						<img alt="Nordhealth logo" src="@/assets/nordhealth.svg" width="30" height="30">
 					</RouterLink>

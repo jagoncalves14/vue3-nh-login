@@ -1,28 +1,16 @@
+import type { Session } from '@supabase/supabase-js'
 import { supabase } from '@/utils/supabase'
 
+interface AuthState {
+	supabase: typeof supabase
+	session: Session | null
+}
+
 export const useAuthStore = defineStore('auth', {
-	state: () => {
+	state: (): AuthState => {
 		return {
 			supabase,
 			session: null,
 		}
-	},
-
-	actions: {
-		async signOut() {
-			try {
-				const { error } = await supabase.auth.signOut()
-				this.session = null
-
-				if (error) {
-					throw error
-				}
-			} catch (error) {
-				if (error instanceof Error) {
-					// eslint-disable-next-line no-alert
-					alert(error.message)
-				}
-			}
-		},
 	},
 })

@@ -3,9 +3,10 @@ import '@nordhealth/components/lib/Stack'
 import '@nordhealth/components/lib/Card'
 import '@nordhealth/components/lib/Input'
 import '@nordhealth/components/lib/Button'
-import type { AuthSchemaErrorsType, AuthSchemaType } from '@/schemas/auth'
+import type { AuthSchemaErrorsType, AuthSchemaKeys, AuthSchemaType } from '@/schemas/auth'
 import { AuthSchema } from '@/schemas/auth'
-import { useAuthStore } from '@/store/modules/auth'
+import signIn from '@/api/auth/auth.sign-in'
+import signUp from '@/api/auth/auth.sign-up'
 
 const props = defineProps({
 	signUp: Boolean,
@@ -13,7 +14,6 @@ const props = defineProps({
 	submitLabel: String,
 })
 
-const { supabase } = useAuthStore()
 const router = useRouter()
 const isLoading = ref(false)
 
@@ -23,53 +23,49 @@ const formData = ref<AuthSchemaType>({
 	password: '',
 })
 
+const hasFormErrors = computed(() => {
+	if (!formErrors?.value) {
+		return false
+	}
+
+	// Check if there are errors in any key
+	return Object.keys(formData.value).some((key) => {
+		return formErrors?.value?.[key as AuthSchemaKeys]?._errors?.length
+	})
+})
+
 async function handleSignUp() {
-	let authError = null
-	formErrors.value = null
+	const { error } = await signUp(formData.value)
 
-	const { data, error } = await supabase.auth.signUp(formData.value)
-
-	// Supabase needs a small hack to check whether user already exists or not.
-	// See https://supabase.com/docs/reference/javascript/auth-signup
-	const userAlreadyExists = data.user && data.user.identities && data.user.identities.length === 0
-	if (userAlreadyExists) {
-		authError = {
-			name: 'AuthApiError',
-			message: 'User already exists',
-		}
-
+	if (error?.message === 'User already exists') {
 		formErrors.value = Object.assign({}, formErrors.value);
 		(formErrors.value as AuthSchemaErrorsType)!.email = {
-			_errors: ['User already exists'],
-		}
-	} else if (error) {
-		authError = {
-			name: error.name,
-			message: error.message,
+			_errors: [error.message],
 		}
 	}
-
-	if (authError?.message) {
-		throw new Error(authError.message)
-	}
-
-	return { data, error: authError }
-}
-
-async function handleSignIn() {
-	const authError = null
-	const { data, error } = await supabase.auth.signInWithPassword(formData.value)
 
 	if (error) {
 		throw new Error(error.message)
 	}
 
-	return { data, error: authError }
+	alert('Success! Please check your email for a confirmation link to complete your account setup.')
+	router.push('/sign-in')
+}
+
+async function handleSignIn() {
+	const { error } = await signIn(formData.value)
+
+	if (error) {
+		throw new Error(error.message)
+	}
+
+	router.push('/')
 }
 
 async function handleSubmit() {
 	isLoading.value = true
 
+	// Client Side validation - Do not do API calls if there are form errors
 	const schemaValidation = AuthSchema.safeParse(formData.value)
 	if (!schemaValidation.success) {
 		formErrors.value = schemaValidation?.error?.format()
@@ -77,20 +73,16 @@ async function handleSubmit() {
 		return
 	}
 
+	// API Calls — Sign Up or Sign In
 	try {
 		if (props.signUp) {
-			await handleSignUp()
-
-			// eslint-disable-next-line no-alert
-			alert('Success! Please check your email for a confirmation link to complete your account setup.')
-			router.push('/sign-in')
+			return await handleSignUp()
 		} else {
-			await handleSignIn()
-			router.push('/')
+			return await handleSignIn()
 		}
 	} catch (error) {
-		if (error instanceof Error && !formErrors?.value?.email?._errors?.length) {
-			// eslint-disable-next-line no-alert
+		// Server Side valition - errors should trigger an alert
+		if (error instanceof Error && !hasFormErrors) {
 			alert(error.message)
 		}
 	} finally {
