@@ -4,9 +4,9 @@ import type { ResetPasswordSchemaErrorsType, ResetPasswordSchemaType } from '@/s
 import { ResetPasswordSchema } from '@/schemas/auth'
 import { useAuthStore } from '@/store/modules/auth'
 
+const { supabase } = useAuthStore()
 const router = useRouter()
 const route = useRoute()
-const { supabase } = useAuthStore()
 
 // Parse the route hash into a dictionary so we can pick out the access_token provided
 function getResetToken(): UserAttributes {

@@ -5,11 +5,12 @@ import { useAuthStore } from '@/store/modules/auth'
 
 const { supabase } = useAuthStore()
 
+const isLoading = ref(false)
+
 const formErrors = ref<ForgotPasswordSchemaErrorsType>(null)
 const formData = ref<ForgotPasswordSchemaType>({
 	email: '',
 })
-const isLoading = ref(false)
 
 async function handleSubmit() {
 	isLoading.value = true
@@ -31,7 +32,7 @@ async function handleSubmit() {
 	if (data) {
 		// eslint-disable-next-line no-alert
 		alert(`
-      Password reset link has been sent to your e-mail.
+      Password reset link has been sent to your email.
       Please check your inbox.
       If you don't see it, please also check your spam folder.
     `)
@@ -56,7 +57,7 @@ async function handleSubmit() {
 					<nord-stack gap="m" direction="vertical" align-items="stretch">
 						<nord-input
 							v-model="formData.email"
-							label="E-mail"
+							label="Email"
 							expand
 							required
 							hide-required
