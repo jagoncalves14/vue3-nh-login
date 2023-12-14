@@ -1,5 +1,5 @@
 import Home from '@/views/Home.vue'
-import Pinia from '@/views/SomePage.vue'
+import Account from '@/views/Account.vue'
 
 export default [
 	{
@@ -11,9 +11,9 @@ export default [
 		},
 	},
 	{
-		path: '/some-page',
-		name: 'somePage',
-		component: Pinia,
+		path: '/account',
+		name: 'account',
+		component: Account,
 		meta: {
 			requiresAuth: true,
 		},

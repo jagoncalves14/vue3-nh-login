@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { ResetPasswordSchemaErrorsType, ResetPasswordSchemaType } from '@/schemas/auth'
 import { ResetPasswordSchema } from '@/schemas/auth'
-import resetPassword from '@/api/auth/auth.reset-password'
+import resetPassword from '@/services/auth/auth.reset-password'
 import getAccessToken from '@/utils/getAccessToken'
 
 const router = useRouter()

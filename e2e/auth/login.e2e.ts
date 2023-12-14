@@ -161,7 +161,7 @@ test('Test navigation after signing in', async ({ page }) => {
 
 	await utils.validateURL('/')
 
-	await page.getByRole('link', { name: 'Some Page' }).click()
+	await page.getByRole('link', { name: 'Account' }).click()
 
 	await utils.validateURL('/some-page')
 

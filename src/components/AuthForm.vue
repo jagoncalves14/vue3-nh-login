@@ -5,8 +5,8 @@ import '@nordhealth/components/lib/Input'
 import '@nordhealth/components/lib/Button'
 import type { AuthSchemaErrorsType, AuthSchemaKeys, AuthSchemaType } from '@/schemas/auth'
 import { AuthSchema } from '@/schemas/auth'
-import signIn from '@/api/auth/auth.sign-in'
-import signUp from '@/api/auth/auth.sign-up'
+import signIn from '@/services/auth/auth.sign-in'
+import signUp from '@/services/auth/auth.sign-up'
 
 const props = defineProps({
 	signUp: Boolean,

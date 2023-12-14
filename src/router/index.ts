@@ -1,7 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
 import { supabase } from '@/utils/supabase'
-import getUser from '@/api/auth/auth.get-user'
+import getUser from '@/services/auth/auth.get-user'
 
 // Import all routing modules in router/modules folder
 const files = import.meta.glob('./modules/*.ts', {

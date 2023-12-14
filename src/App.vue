@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import signOut from './api/auth/auth.sign-out'
+import signOut from '@/services/auth/auth.sign-out'
 import { supabase } from '@/utils/supabase'
 import { useAuthStore } from '@/store/modules/auth'
 import '@nordhealth/components/lib/Button'
@@ -61,12 +61,12 @@ async function handleSignOut() {
 						<template v-if="session">
 							<li>
 								<RouterLink v-slot="{ isActive }" to="/" class="no-underline">
-									<span class="block py-2 text-sm text-gray-600 hover:text-gray-900" :class="{ 'text-green-500 hover:text-green-700': isActive }">Home</span>
+									<span class="block py-2 text-sm text-gray-600 hover:text-gray-900" :class="{ 'text-green-700 hover:text-green-900': isActive }">Home</span>
 								</RouterLink>
 							</li>
 							<li>
-								<RouterLink v-slot="{ isActive }" to="/some-page" class="no-underline">
-									<span class="block py-2 text-sm text-gray-600 hover:text-gray-900" :class="{ 'text-green-500 hover:text-green-700': isActive }">Some Page</span>
+								<RouterLink v-slot="{ isActive }" to="/account" class="no-underline">
+									<span class="block py-2 text-sm text-gray-600 hover:text-gray-900" :class="{ 'text-green-700 hover:text-green-900': isActive }">Account</span>
 								</RouterLink>
 							</li>
 						</template>
