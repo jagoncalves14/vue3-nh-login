@@ -8,17 +8,17 @@ dotenv.config()
 
 // Set up Supabase client
 const supabaseUrl = process.env.VITE_SUPABASE_URL || ''
-const supabaseKey = process.env.VITE_SUPABASE_KEY || ''
+const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY || ''
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-export default async (req: VercelRequest, res: VercelResponse): Promise<void> => {
+export default async function (request: VercelRequest, response: VercelResponse) {
 	try {
 		// Extract user ID from request body or parameters
-		const { userId } = req.body
+		const { userId } = request.body
 
 		// Ensure userId is provided
 		if (!userId) {
-			res.status(400).json({ error: 'User ID is required.' })
+			response.status(400).json({ error: 'User ID is required.' })
 			return
 		}
 
@@ -30,7 +30,7 @@ export default async (req: VercelRequest, res: VercelResponse): Promise<void> =>
 			.single()
 
 		if (!existingUser) {
-			res.status(404).json({ error: 'User not found.' })
+			response.status(404).json({ error: 'User not found.' })
 			return
 		}
 
@@ -44,9 +44,9 @@ export default async (req: VercelRequest, res: VercelResponse): Promise<void> =>
 			throw error
 		}
 
-		res.status(200).json({ message: 'Account deleted successfully.' })
+		response.status(200).json({ message: 'Account deleted successfully.' })
 	} catch (error) {
 		console.error('Error deleting account:', error)
-		res.status(500).json({ error: 'Internal Server Error' })
+		response.status(500).json({ error: 'Internal Server Error' })
 	}
 }
