@@ -49,7 +49,7 @@ export default ({ mode }) => {
 				],
 			}),
 			AutoImport({
-				imports: ['vue', 'vue-router', 'pinia'],
+				imports: ['vue', 'vue-router', 'pinia', 'vitest'],
 				resolvers: [
 					IconsResolver({
 						prefix: 'Icon',

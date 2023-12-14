@@ -6,10 +6,10 @@ export default function getAccessToken(): UserAttributes {
 	const hashDictionary = {} as Record<string, string | UserAttributes>
 
 	// First remove the actual '#' character
-	const hash = route.hash.replace('#', '')
+	const hash = route?.hash?.replace('#', '')
 
 	// Split hash into key-value pairs
-	hash.split('&').forEach((item) => {
+	hash?.split('&')?.forEach((item) => {
 		// Split 'key=value' into [key, value]
 		const [key, value] = item.split('=')
 		// Add to results

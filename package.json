@@ -30,7 +30,10 @@
 		"lint:fix": "eslint \"{src,mock}/**/*.{vue,js,ts,tsx}\" --fix",
 		"stylelint": "stylelint \"**/*.{html,vue,css,less}\" --cache",
 		"stylelint:fix": "stylelint \"**/*.{html,vue,css,less}\" --cache --fix",
-		"prepare": "husky install"
+		"prepare": "husky install",
+		"unit": "TZ=UTC vitest run",
+		"unit:u": "TZ=UTC vitest run -u",
+		"unit:watch": "TZ=UTC vitest watch"
 	},
 	"dependencies": {
 		"@nordhealth/components": "^3.6.2",
@@ -57,6 +60,8 @@
 		"eslint-plugin-antfu": "^2.0.0",
 		"eslint-plugin-format": "^0.1.0",
 		"husky": "^8.0.3",
+		"install": "^0.13.0",
+		"jsdom": "^23.0.1",
 		"lint-staged": "^15.2.0",
 		"postcss-html": "^1.5.0",
 		"sass": "^1.69.5",
