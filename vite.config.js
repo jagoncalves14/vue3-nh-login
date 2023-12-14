@@ -71,6 +71,11 @@ export default ({ mode }) => {
 				autoInstall: true,
 			}),
 		],
+		test: {
+			include: ['**/*.spec.ts'],
+			environment: 'jsdom',
+			globals: true,
+		},
 		resolve: {
 			alias: {
 				'@': resolve(__dirname, 'src'),

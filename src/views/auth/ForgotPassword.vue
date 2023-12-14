@@ -23,11 +23,7 @@ async function handleSubmit() {
 	const { data, error } = await forgotPassword(formData.value.email)
 
 	if (data) {
-		alert(`
-      Password reset link has been sent to your email.
-      Please check your inbox.
-      If you don't see it, please also check your spam folder.
-    `)
+		alert(`Password reset link has been sent to your email. Please check your inbox. If you don't see it, please also check your spam folder.`)
 	} else if (error) {
 		alert(error.message)
 	}

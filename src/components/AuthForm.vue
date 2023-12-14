@@ -37,7 +37,7 @@ const hasFormErrors = computed(() => {
 async function handleSignUp() {
 	const { error } = await signUp(formData.value)
 
-	if (error?.message === 'User already exists') {
+	if (error?.message === 'User already registered') {
 		formErrors.value = Object.assign({}, formErrors.value);
 		(formErrors.value as AuthSchemaErrorsType)!.email = {
 			_errors: [error.message],
@@ -47,13 +47,17 @@ async function handleSignUp() {
 	if (error) {
 		throw new Error(error.message)
 	}
-
-	alert('Success! Please check your email for a confirmation link to complete your account setup.')
-	router.push('/sign-in')
 }
 
 async function handleSignIn() {
 	const { error } = await signIn(formData.value)
+
+	if (error?.message === 'Invalid login credentials') {
+		formErrors.value = Object.assign({}, formErrors.value);
+		(formErrors.value as AuthSchemaErrorsType)!.password = {
+			_errors: [error.message],
+		}
+	}
 
 	if (error) {
 		throw new Error(error.message)
@@ -76,10 +80,10 @@ async function handleSubmit() {
 	// API Calls — Sign Up or Sign In
 	try {
 		if (props.signUp) {
-			return await handleSignUp()
-		} else {
-			return await handleSignIn()
+			await handleSignUp()
 		}
+
+		return await handleSignIn()
 	} catch (error) {
 		// Server Side valition - errors should trigger an alert
 		if (error instanceof Error && !hasFormErrors) {
