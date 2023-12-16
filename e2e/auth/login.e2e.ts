@@ -143,7 +143,12 @@ test('Delete user', async ({ page }) => {
 	const hasDialogOpened = []
 	page.on('dialog', async (alert) => {
 		hasDialogOpened.push(true)
-		await expect(alert.message()).toBe('Are you sure you want to delete your account?')
+
+		if (hasDialogOpened?.length <= 2) {
+			await expect(alert.message()).toBe('Are you sure you want to delete your account?')
+		} else {
+			await expect(alert.message()).toBe('Your account has been deleted.')
+		}
 
 		if (hasDialogOpened?.length === 1) {
 			await alert.dismiss()
