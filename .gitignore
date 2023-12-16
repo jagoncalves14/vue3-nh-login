@@ -39,3 +39,4 @@ dist-ssr
 # Environment variables
 .env*
 !.env.example
+.vercel

@@ -61,18 +61,30 @@ async function handleSignOut() {
 						<template v-if="session">
 							<li>
 								<RouterLink v-slot="{ isActive }" to="/" class="no-underline">
-									<span class="block py-2 text-sm text-gray-600 hover:text-gray-900" :class="{ 'text-green-700 hover:text-green-900': isActive }">Home</span>
+									<span
+										class="block py-2 text-sm text-gray-600 hover:text-gray-900"
+										:class="{ 'text-accent hover:text-accent hover:brightness-75 underline': isActive }"
+									>
+										Home
+									</span>
 								</RouterLink>
 							</li>
 							<li>
 								<RouterLink v-slot="{ isActive }" to="/account" class="no-underline">
-									<span class="block py-2 text-sm text-gray-600 hover:text-gray-900" :class="{ 'text-green-700 hover:text-green-900': isActive }">Account</span>
+									<span
+										class="block py-2 text-sm text-gray-600 hover:text-gray-900"
+										:class="{ 'text-accent hover:text-accent hover:brightness-75 underline': isActive }"
+									>
+										Account
+									</span>
 								</RouterLink>
 							</li>
 						</template>
 						<li>
 							<template v-if="!session">
-								<RouterLink v-if="currentRouteName === 'signIn'" to="/sign-up" class="cursor-pointer text-inherit no-underline">
+								<RouterLink
+									v-if="currentRouteName === 'signIn'" to="/sign-up" class="cursor-pointer text-inherit no-underline"
+								>
 									<nord-button>
 										Sign up
 									</nord-button>

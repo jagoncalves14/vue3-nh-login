@@ -32,4 +32,7 @@ export default defineConfig({
 		transformerVariantGroup(),
 	],
 	safelist: 'prose m-auto text-left'.split(' '),
+	rules: [
+		['text-accent', { color: 'var(--n-color-accent)' }],
+	],
 })

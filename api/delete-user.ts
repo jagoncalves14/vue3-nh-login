@@ -8,8 +8,13 @@ dotenv.config()
 
 // Set up Supabase client
 const supabaseUrl = process.env.VITE_SUPABASE_URL || ''
-const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY || ''
-const supabase = createClient(supabaseUrl, supabaseKey)
+const serviceRoleKey = process.env.VITE_SUPABASE_SERVICE_ROLE_KEY || ''
+const supabase = createClient(supabaseUrl, serviceRoleKey, {
+	auth: {
+		autoRefreshToken: false,
+		persistSession: false,
+	},
+})
 
 export default async function (request: VercelRequest, response: VercelResponse) {
 	try {
@@ -22,24 +27,8 @@ export default async function (request: VercelRequest, response: VercelResponse)
 			return
 		}
 
-		// Check if the user exists before attempting to delete
-		const { data: existingUser } = await supabase
-			.from('users')
-			.select('id')
-			.eq('id', userId)
-			.single()
-
-		if (!existingUser) {
-			response.status(404).json({ error: 'User not found.' })
-			return
-		}
-
 		// Perform the deletion
-		const { error } = await supabase
-			.from('users')
-			.delete()
-			.eq('id', userId)
-
+		const { error } = await supabase.auth.admin.deleteUser(userId)
 		if (error) {
 			throw error
 		}

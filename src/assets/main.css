@@ -16,3 +16,7 @@ body {
   font-family: var(--n-font-family);
   line-height: var(--n-line-height);
 }
+
+.text-accent {
+  color: var(--n-color-accent);
+}

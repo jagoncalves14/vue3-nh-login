@@ -46,6 +46,7 @@ test('Sign Up', async ({ page }) => {
 
 	// Fill form correctly
 	await page.getByPlaceholder('user@example.com').fill(CREDENTIALS.username)
+	await page.getByRole('button', { name: 'Sign up' }).click()
 
 	// Should redirect user to sign in page
 	await utils.validateURL('/')
@@ -126,31 +127,7 @@ test('Forgot Password', async ({ page }) => {
 	await utils.validateURL('/forgot-password')
 })
 
-test('TODO: Create account settings page to delete user', async ({ page }) => {
-	await page.goto(`${DOMAIN}/`)
-})
-
-test('Test Count clicks', async ({ page }) => {
-	// Sign in
-	await page.goto(`${DOMAIN}/`)
-	await page.goto(`${DOMAIN}/sign-in`)
-	await page.getByPlaceholder('user@example.com').click()
-	await page.getByPlaceholder('user@example.com').fill(CREDENTIALS.username)
-	await page.getByPlaceholder('user@example.com').press('Tab')
-	await page.getByPlaceholder('••••••••').fill(CREDENTIALS.password)
-	await page.getByRole('button', { name: 'Sign in' }).click()
-
-	// Test counter click
-	const button = await page.getByRole('button', { name: 'Count is: 0' })
-	await button.click({
-		clickCount: 6,
-	})
-	// Verify if the button has the expected text
-	await expect(page.getByRole('button', { name: 'Count is: 6' })).toBeVisible()
-})
-
-test('Test navigation after signing in', async ({ page }) => {
-	// Sign in
+test('Delete user', async ({ page }) => {
 	await page.goto(`${DOMAIN}/`)
 	await page.goto(`${DOMAIN}/sign-in`)
 	await page.getByPlaceholder('user@example.com').click()
@@ -163,9 +140,25 @@ test('Test navigation after signing in', async ({ page }) => {
 
 	await page.getByRole('link', { name: 'Account' }).click()
 
-	await utils.validateURL('/some-page')
+	await utils.validateURL('/account')
 
-	await page.getByRole('link', { name: 'Home' }).click()
+	await page.getByRole('button', { name: 'Delete workspace' }).click()
 
-	await utils.validateURL('/')
+	// Wait for the 'dialog' event - dismiss deletion
+	let dialog = await page.waitForEvent('dialog')
+	await expect(dialog.message()).toBe('Are you sure you want to delete your account?')
+	await dialog.dismiss()
+
+	// Should remain in the same page
+	await utils.validateURL('/account')
+
+	await page.getByRole('button', { name: 'Delete account' }).click()
+
+	// Wait for the 'dialog' event - confirm deletion
+	dialog = await page.waitForEvent('dialog')
+	await expect(dialog.message()).toBe('Are you sure you want to delete your account?')
+	await dialog.accept()
+
+	// Should remain in the same page
+	await utils.validateURL('/sign-in')
 })

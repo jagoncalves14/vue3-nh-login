@@ -56,31 +56,32 @@ async function handleDeleteUser() {
 		<nord-card class="my-10" padding="l">
 			<nord-stack class="stack" direction="vertical" align-items="stretch">
 				<div class="px-10 py-5">
-					<h1>Hi - This is your account! 🙋</h1>
+					<h1>Account</h1>
 				</div>
-				<nord-card padding="l" class="px-10 pb-10">
-					<div slot="header">Account</div>
-					<p class="n-color-text-weaker">Check your account settings here.</p>
+				<nord-card gap="l" direction="vertical" padding="l" class="px-10 pb-10">
+					<div slot="header">Details</div>
+					<nord-stack gap="l" direction="vertical" align-items="stretch">
+						<p class="n-color-text-weaker">Check your account details here.</p>
+						<nord-stack gap="m" direction="vertical" align-items="stretch">
+							<nord-input
+								:value="userEmail"
+								readonly
+								label="Email"
+								expand
+								name="email"
+								autocomplete="email"
+								type="email"
+								size="m"
+							/>
 
-					<nord-stack gap="m" direction="vertical" align-items="stretch">
-						<nord-input
-							:value="userEmail"
-							readonly
-							label="Email"
-							expand
-							name="email"
-							autocomplete="email"
-							type="email"
-							size="m"
-						/>
-
-						<div class="py-5">
-							<nord-divider />
-						</div>
-						<nord-stack class="stack" direction="vertical" align-items="stretch">
-							<h3 slot="header">Delete your account</h3>
-							<p class="n-color-text-weaker">If you want to permanently delete this account and all of its data, you can do that do that below.</p>
-							<nord-button variant="danger" type="submit" size="m" @click="handleDeleteClick">Delete workspace</nord-button>
+							<div class="py-5">
+								<nord-divider />
+							</div>
+							<nord-stack class="stack" direction="vertical" align-items="stretch">
+								<h3 slot="header">Delete your account</h3>
+								<p class="n-color-text-weaker">If you want to permanently delete this account and all of its data, you can do that do that below.</p>
+								<nord-button variant="danger" type="submit" size="m" @click="handleDeleteClick">Delete account</nord-button>
+							</nord-stack>
 						</nord-stack>
 					</nord-stack>
 				</nord-card>
