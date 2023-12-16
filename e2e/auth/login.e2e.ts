@@ -92,7 +92,7 @@ test('Sign out', async ({ page }) => {
 	await utils.validateURL('/sign-in')
 })
 
-test.only('Forgot Password', async ({ page }) => {
+test('Forgot Password', async ({ page }) => {
 	await page.route('*/**/auth/v1/recover**', async (route) => {
 		route.fulfill({
 			status: 200,
@@ -140,19 +140,23 @@ test('Delete user', async ({ page }) => {
 
 	await utils.validateURL('/account')
 
+	const hasDialogOpened = []
 	page.on('dialog', async (alert) => {
+		hasDialogOpened.push(true)
 		await expect(alert.message()).toBe('Are you sure you want to delete your account?')
-		await alert.dismiss()
+
+		if (hasDialogOpened?.length === 1) {
+			await alert.dismiss()
+		} else {
+			await alert.accept()
+		}
 	})
+
 	await page.getByRole('button', { name: 'Delete account' }).click()
 
 	// Should remain in the same page
 	await utils.validateURL('/account')
 
-	page.on('dialog', async (alert) => {
-		await expect(alert.message()).toBe('Are you sure you want to delete your account?')
-		await alert.accept()
-	})
 	await page.getByRole('button', { name: 'Delete account' }).click()
 
 	// Should remain in the same page
