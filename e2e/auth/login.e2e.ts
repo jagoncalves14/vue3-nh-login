@@ -142,7 +142,7 @@ test('Delete user', async ({ page }) => {
 
 	await utils.validateURL('/account')
 
-	await page.getByRole('button', { name: 'Delete workspace' }).click()
+	await page.getByRole('button', { name: 'Delete account' }).click()
 
 	// Wait for the 'dialog' event - dismiss deletion
 	let dialog = await page.waitForEvent('dialog')
