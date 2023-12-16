@@ -92,7 +92,7 @@ test('Sign out', async ({ page }) => {
 	await utils.validateURL('/sign-in')
 })
 
-test('Forgot Password', async ({ page }) => {
+test.only('Forgot Password', async ({ page }) => {
 	await page.route('*/**/auth/v1/recover**', async (route) => {
 		route.fulfill({
 			status: 200,
@@ -116,15 +116,13 @@ test('Forgot Password', async ({ page }) => {
 
 	// Fill form correctly
 	await page.getByPlaceholder('user@example.com').fill(CREDENTIALS.username)
+	// Click button - and wait for the 'dialog' event
+	page.on('dialog', async (alert) => {
+		await expect(alert.message()).toBe(`Password reset link has been sent to your email. Please check your inbox. If you don't see it, please also check your spam folder.`)
+		await alert.accept()
+	})
 	await page.getByRole('button', { name: 'Submit' }).click()
-
-	// Wait for the 'dialog' event
-	const dialog = await page.waitForEvent('dialog')
-	await expect(dialog.message()).toBe(`Password reset link has been sent to your email. Please check your inbox. If you don't see it, please also check your spam folder.`)
-	await dialog.accept()
-
-	// Should remain in the same page
-	await utils.validateURL('/forgot-password')
+	await	utils.validateURL('/forgot-password')
 })
 
 test('Delete user', async ({ page }) => {
@@ -142,22 +140,20 @@ test('Delete user', async ({ page }) => {
 
 	await utils.validateURL('/account')
 
+	page.on('dialog', async (alert) => {
+		await expect(alert.message()).toBe('Are you sure you want to delete your account?')
+		await alert.dismiss()
+	})
 	await page.getByRole('button', { name: 'Delete account' }).click()
-
-	// Wait for the 'dialog' event - dismiss deletion
-	let dialog = await page.waitForEvent('dialog')
-	await expect(dialog.message()).toBe('Are you sure you want to delete your account?')
-	await dialog.dismiss()
 
 	// Should remain in the same page
 	await utils.validateURL('/account')
 
+	page.on('dialog', async (alert) => {
+		await expect(alert.message()).toBe('Are you sure you want to delete your account?')
+		await alert.accept()
+	})
 	await page.getByRole('button', { name: 'Delete account' }).click()
-
-	// Wait for the 'dialog' event - confirm deletion
-	dialog = await page.waitForEvent('dialog')
-	await expect(dialog.message()).toBe('Are you sure you want to delete your account?')
-	await dialog.accept()
 
 	// Should remain in the same page
 	await utils.validateURL('/sign-in')
