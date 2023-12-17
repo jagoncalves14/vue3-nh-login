@@ -107,7 +107,10 @@ async function handleSignOut() {
 				</div>
 			</div>
 		</header>
-
 		<RouterView />
 	</div>
 </template>
+
+<style lang="scss">
+@import url('@/assets/main.scss');
+</style>

@@ -20,6 +20,7 @@ export default ({ mode }: ConfigEnv) => {
 
 	return defineConfig({
 		base: VITE_BASE_URL,
+
 		plugins: [
 			vue({
 				template: {
@@ -76,20 +77,18 @@ export default ({ mode }: ConfigEnv) => {
 				autoInstall: true,
 			}),
 		],
-		test: {
-			include: ['**/*.spec.ts'],
-			environment: 'jsdom',
-			globals: true,
-		},
+
 		resolve: {
 			alias: {
 				'@': resolve(__dirname, 'src'),
 			},
 		},
+
 		optimizeDeps: {
 			include: ['pinia', '@vueuse/core'],
 			exclude: ['@iconify-icons/lets-icons'],
 		},
+
 		server: {
 			// The port number
 			port: Number(VITE_PORT),
@@ -107,6 +106,7 @@ export default ({ mode }: ConfigEnv) => {
 				clientFiles: ['./index.html', './src/{views,components}/*'],
 			},
 		},
+
 		build: {
 			// Set the browser compatibility target for the final build
 			target: 'es2015',
@@ -133,6 +133,12 @@ export default ({ mode }: ConfigEnv) => {
 					},
 				},
 			},
+		},
+
+		test: {
+			include: ['**/*.spec.ts'],
+			environment: 'jsdom',
+			globals: true,
 		},
 	})
 }
