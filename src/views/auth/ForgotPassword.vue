@@ -55,7 +55,7 @@ async function handleSubmit() {
 							name="email"
 							autocomplete="email"
 							type="email"
-							placeholder="user@example.com"
+							placeholder="Enter your email"
 							size="m"
 							:error="formErrors?.email?._errors"
 						/>

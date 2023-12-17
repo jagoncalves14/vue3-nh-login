@@ -62,6 +62,7 @@ async function handleDeleteUser() {
 				<div class="py-5 md:px-10">
 					<h1>Account  ⛄️</h1>
 				</div>
+
 				<nord-card gap="l" direction="vertical" padding="l" class="pb-10 md:px-10">
 					<div slot="header">Details</div>
 					<nord-stack gap="l" direction="vertical" align-items="stretch">
@@ -70,7 +71,6 @@ async function handleDeleteUser() {
 							<nord-input
 								class="inline-block"
 								:value="userEmail"
-
 								label="Email"
 								expand readonly
 								name="email"

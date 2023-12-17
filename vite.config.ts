@@ -32,6 +32,7 @@ export default ({ mode }: ConfigEnv) => {
 			UnoCSS({
 				shortcuts: [
 					{ logo: 'i-logos-vue w-6em h-6em transform transition-800' },
+					{ 'plain-link': 'no-underline text-accent hover:text-accent hover:brightness-75' },
 				],
 				presets: [
 					presetUno(),

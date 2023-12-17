@@ -9,6 +9,8 @@ export const AuthSchema = z.object({
 	password: z
 		.string()
 		.min(6),
+	newsletter: z
+		.boolean(),
 }).required({ email: true, password: true })
 export type AuthSchemaType = z.infer<typeof AuthSchema>
 export type AuthSchemaKeys = keyof AuthSchemaType

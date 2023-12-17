@@ -10,7 +10,7 @@ useHead({
 		submit-label="Sign in"
 	>
 		<template #actions>
-			New to Nord? <RouterLink to="/sign-up">Create an account</RouterLink>.
+			New to Nord? <RouterLink to="/sign-up" class="plain-link">Create an account</RouterLink>.
 		</template>
 	</AuthForm>
 </template>

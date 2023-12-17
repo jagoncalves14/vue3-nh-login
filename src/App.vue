@@ -87,13 +87,13 @@ async function handleSignOut() {
 						<li>
 							<template v-if="!session">
 								<RouterLink
-									v-if="currentRouteName === 'signIn'" to="/sign-up" class="cursor-pointer text-inherit no-underline"
+									v-if="currentRouteName === 'signIn'" to="/sign-up" class="text-inherit no-underline"
 								>
 									<nord-button>
 										Sign up
 									</nord-button>
 								</RouterLink>
-								<RouterLink v-else to="/sign-in" class="cursor-pointer text-inherit no-underline">
+								<RouterLink v-else to="/sign-in" class="text-inherit no-underline">
 									<nord-button>
 										Sign in
 									</nord-button>

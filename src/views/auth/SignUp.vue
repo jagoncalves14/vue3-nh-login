@@ -11,7 +11,7 @@ useHead({
 		submit-label="Sign up"
 	>
 		<template #actions>
-			Already have an account? <RouterLink to="/sign-in">Sign in</RouterLink>.
+			Already have an account? <RouterLink to="/sign-in" class="plain-link">Sign in</RouterLink>.
 		</template>
 	</AuthForm>
 </template>

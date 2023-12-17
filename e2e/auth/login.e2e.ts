@@ -26,10 +26,10 @@ test('Sign Up', async ({ page }) => {
 	await utils.validateURL('/sign-up')
 
 	// Fill form incorrectly
-	await page.getByPlaceholder('user@example.com').click()
-	await page.getByPlaceholder('user@example.com').fill(WRONG_CREDENTIALS.invalidUsername)
-	await page.getByPlaceholder('user@example.com').press('Tab')
-	await page.getByPlaceholder('••••••••').fill(WRONG_CREDENTIALS.invalidPassword)
+	await page.getByPlaceholder('Enter your email').click()
+	await page.getByPlaceholder('Enter your email').fill(WRONG_CREDENTIALS.invalidUsername)
+	await page.getByPlaceholder('Enter your email').press('Tab')
+	await page.getByPlaceholder('Enter your password').fill(WRONG_CREDENTIALS.invalidPassword)
 	await page.getByRole('button', { name: 'Sign up' }).click()
 
 	// Errors should display
@@ -37,15 +37,15 @@ test('Sign Up', async ({ page }) => {
 	await expect(page.getByText('This is not a valid email.')).toBeVisible()
 
 	// Fill form incorrectly - user that is already registered
-	await page.getByPlaceholder('user@example.com').fill(WRONG_CREDENTIALS.alreadyExistingUsername)
-	await page.getByPlaceholder('••••••••').fill(CREDENTIALS.password)
+	await page.getByPlaceholder('Enter your email').fill(WRONG_CREDENTIALS.alreadyExistingUsername)
+	await page.getByPlaceholder('Enter your password').fill(CREDENTIALS.password)
 	await page.getByRole('button', { name: 'Sign up' }).click()
 
 	// Error should display
 	await expect(page.getByText('User already registered')).toBeVisible()
 
 	// Fill form correctly
-	await page.getByPlaceholder('user@example.com').fill(CREDENTIALS.username)
+	await page.getByPlaceholder('Enter your email').fill(CREDENTIALS.username)
 	await page.getByRole('button', { name: 'Sign up' }).click()
 
 	// Should redirect user to sign in page
@@ -56,10 +56,10 @@ test('Sign in', async ({ page }) => {
 	await page.goto(`${DOMAIN}/`)
 
 	// Fill form incorrectly
-	await page.getByPlaceholder('user@example.com').click()
-	await page.getByPlaceholder('user@example.com').fill(WRONG_CREDENTIALS.invalidUsername)
-	await page.getByPlaceholder('user@example.com').press('Tab')
-	await page.getByPlaceholder('••••••••').fill(WRONG_CREDENTIALS.invalidPassword)
+	await page.getByPlaceholder('Enter your email').click()
+	await page.getByPlaceholder('Enter your email').fill(WRONG_CREDENTIALS.invalidUsername)
+	await page.getByPlaceholder('Enter your email').press('Tab')
+	await page.getByPlaceholder('Enter your password').fill(WRONG_CREDENTIALS.invalidPassword)
 	await page.getByRole('button', { name: 'Sign in' }).click()
 
 	// Errors should display
@@ -67,10 +67,10 @@ test('Sign in', async ({ page }) => {
 	await expect(page.getByText('This is not a valid email.')).toBeVisible()
 
 	// Fill form correctly
-	await page.getByPlaceholder('user@example.com').click()
-	await page.getByPlaceholder('user@example.com').fill(CREDENTIALS.username)
-	await page.getByPlaceholder('user@example.com').press('Tab')
-	await page.getByPlaceholder('••••••••').fill(CREDENTIALS.password)
+	await page.getByPlaceholder('Enter your email').click()
+	await page.getByPlaceholder('Enter your email').fill(CREDENTIALS.username)
+	await page.getByPlaceholder('Enter your email').press('Tab')
+	await page.getByPlaceholder('Enter your password').fill(CREDENTIALS.password)
 	await page.getByRole('button', { name: 'Sign in' }).click()
 
 	await utils.validateURL('/')
@@ -79,10 +79,10 @@ test('Sign in', async ({ page }) => {
 test('Sign out', async ({ page }) => {
 	await page.goto(`${DOMAIN}/`)
 	await page.goto(`${DOMAIN}/sign-in`)
-	await page.getByPlaceholder('user@example.com').click()
-	await page.getByPlaceholder('user@example.com').fill(CREDENTIALS.username)
-	await page.getByPlaceholder('user@example.com').press('Tab')
-	await page.getByPlaceholder('••••••••').fill(CREDENTIALS.password)
+	await page.getByPlaceholder('Enter your email').click()
+	await page.getByPlaceholder('Enter your email').fill(CREDENTIALS.username)
+	await page.getByPlaceholder('Enter your email').press('Tab')
+	await page.getByPlaceholder('Enter your password').fill(CREDENTIALS.password)
 	await page.getByRole('button', { name: 'Sign in' }).click()
 
 	await utils.validateURL('/')
@@ -108,14 +108,14 @@ test('Forgot Password', async ({ page }) => {
 	await utils.validateURL('/forgot-password')
 
 	// Fill form incorrectly
-	await page.getByPlaceholder('user@example.com').fill('joaoan')
+	await page.getByPlaceholder('Enter your email').fill('joaoan')
 	await page.getByRole('button', { name: 'Submit' }).click()
 
 	// Errors should display
 	await expect(page.getByText('This is not a valid email.')).toBeVisible()
 
 	// Fill form correctly
-	await page.getByPlaceholder('user@example.com').fill(CREDENTIALS.username)
+	await page.getByPlaceholder('Enter your email').fill(CREDENTIALS.username)
 	// Click button - and wait for the 'dialog' event
 	page.on('dialog', async (alert) => {
 		await expect(alert.message()).toBe(`Password reset link has been sent to your email. Please check your inbox. If you don't see it, please also check your spam folder.`)
@@ -128,10 +128,10 @@ test('Forgot Password', async ({ page }) => {
 test('Delete user', async ({ page }) => {
 	await page.goto(`${DOMAIN}/`)
 	await page.goto(`${DOMAIN}/sign-in`)
-	await page.getByPlaceholder('user@example.com').click()
-	await page.getByPlaceholder('user@example.com').fill(CREDENTIALS.username)
-	await page.getByPlaceholder('user@example.com').press('Tab')
-	await page.getByPlaceholder('••••••••').fill(CREDENTIALS.password)
+	await page.getByPlaceholder('Enter your email').click()
+	await page.getByPlaceholder('Enter your email').fill(CREDENTIALS.username)
+	await page.getByPlaceholder('Enter your email').press('Tab')
+	await page.getByPlaceholder('Enter your password').fill(CREDENTIALS.password)
 	await page.getByRole('button', { name: 'Sign in' }).click()
 
 	await utils.validateURL('/')

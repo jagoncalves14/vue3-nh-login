@@ -3,6 +3,7 @@ import '@nordhealth/components/lib/Stack'
 import '@nordhealth/components/lib/Card'
 import '@nordhealth/components/lib/Input'
 import '@nordhealth/components/lib/Button'
+import '@nordhealth/components/lib/Checkbox'
 import type { AuthSchemaErrorsType, AuthSchemaKeys, AuthSchemaType } from '@/schemas/auth'
 import { AuthSchema } from '@/schemas/auth'
 import signIn from '@/services/auth/auth.sign-in'
@@ -15,12 +16,14 @@ const props = defineProps({
 })
 
 const router = useRouter()
+
 const isLoading = ref(false)
 
 const formErrors = ref<AuthSchemaErrorsType>(null)
 const formData = ref<AuthSchemaType>({
 	email: '',
 	password: '',
+	newsletter: false,
 })
 
 const hasFormErrors = computed(() => {
@@ -33,6 +36,17 @@ const hasFormErrors = computed(() => {
 		return formErrors?.value?.[key as AuthSchemaKeys]?._errors?.length
 	})
 })
+
+const shouldRevealPassword = ref(false)
+function onRevealPasswordCheckboxChange(event: Event) {
+	const isChecked = (event?.target as HTMLInputElement)?.checked
+	shouldRevealPassword.value = isChecked
+}
+
+function onNewsletterCheckboxChange(event: Event) {
+	const isChecked = (event?.target as HTMLInputElement)?.checked
+	formData.value.newsletter = isChecked
+}
 
 async function handleSignUp() {
 	const { error } = await signUp(formData.value)
@@ -50,7 +64,13 @@ async function handleSignUp() {
 }
 
 async function handleSignIn() {
-	const { error } = await signIn(formData.value)
+	// Exclude newsletter field
+	const payload = {
+		email: formData.value.email,
+		password: formData.value.password,
+	}
+
+	const { error } = await signIn(payload)
 
 	if (error?.message === 'Invalid login credentials') {
 		formErrors.value = Object.assign({}, formErrors.value);
@@ -114,7 +134,7 @@ async function handleSubmit() {
 							name="email"
 							autocomplete="email"
 							type="email"
-							placeholder="user@example.com"
+							placeholder="Enter your email"
 							size="m"
 							:error="formErrors?.email?._errors"
 						/>
@@ -127,19 +147,38 @@ async function handleSubmit() {
 								hide-required
 								name="password"
 								autocomplete="password"
-								type="password"
-								placeholder="••••••••"
+								placeholder="Enter your password"
 								size="m"
+								:type="shouldRevealPassword ? 'text' : 'password'"
 								:error="formErrors?.password?._errors"
+							/>
+							<nord-checkbox
+								v-model="shouldRevealPassword"
+								:label="`${shouldRevealPassword ? 'Hide' : 'Show'} password`"
+								class="mt-2"
+								size="s"
+								@change="onRevealPasswordCheckboxChange"
 							/>
 							<RouterLink
 								v-if="!props.signUp"
 								to="/forgot-password"
-								class="absolute end-0 top-0 text-xs leading-6 no-underline"
+								class="plain-link absolute end-0 top-0 text-xs leading-6"
 							>
 								Forgot password?
 							</RouterLink>
 						</div>
+
+						<template v-if="props.signUp">
+							<nord-divider />
+							<nord-checkbox
+								v-model="formData.newsletter"
+								label="I want to occasionally receive product updates and announcements."
+								class="mt-2"
+								size="s"
+								@change="onNewsletterCheckboxChange"
+							/>
+						</template>
+
 						<nord-button type="submit" expand variant="primary" size="m" :disabled="isLoading">
 							{{ isLoading ? 'Loading' : submitLabel }}
 						</nord-button>

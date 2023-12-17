@@ -12,6 +12,12 @@ const formData = ref<ResetPasswordSchemaType>({
 	password: '',
 })
 
+const shouldRevealPassword = ref(false)
+function onRevealPasswordCheckboxChange(event: Event) {
+	const isChecked = (event?.target as HTMLInputElement)?.checked
+	shouldRevealPassword.value = isChecked
+}
+
 async function handleSubmit() {
 	isLoading.value = true
 
@@ -53,11 +59,19 @@ async function handleSubmit() {
 							hide-required
 							name="password"
 							autocomplete="password"
-							type="password"
-							placeholder="••••••••"
+							placeholder="Enter your password"
 							size="m"
+							:type="shouldRevealPassword ? 'text' : 'password'"
 							:error="formErrors?.password?._errors"
 						/>
+						<nord-checkbox
+							v-model="shouldRevealPassword"
+							:label="`${shouldRevealPassword ? 'Hide' : 'Show'} password`"
+							class="mt-2"
+							size="s"
+							@change="onRevealPasswordCheckboxChange"
+						/>
+
 						<nord-button
 							label="Password"
 							expand
