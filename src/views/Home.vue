@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import '@nordhealth/components/lib/Button'
 
 useHead({

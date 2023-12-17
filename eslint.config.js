@@ -28,6 +28,9 @@ export default antfu(
 				singleline: 'never',
 				multiline: 'always',
 			}],
+			'vue/component-tags-order': ['error', {
+				order: [['script', 'template'], 'style'],
+			}],
 		},
 	},
 )

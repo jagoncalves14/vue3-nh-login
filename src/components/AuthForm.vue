@@ -162,7 +162,7 @@ async function handleSubmit() {
 							<RouterLink
 								v-if="!props.signUp"
 								to="/forgot-password"
-								class="plain-link absolute end-0 top-0 text-xs leading-6"
+								class="absolute end-0 top-0 text-xs leading-6 plain-link"
 							>
 								Forgot password?
 							</RouterLink>

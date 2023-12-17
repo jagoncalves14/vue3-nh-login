@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import type { ResetPasswordSchemaErrorsType, ResetPasswordSchemaType } from '@/schemas/auth'
 import { ResetPasswordSchema } from '@/schemas/auth'
 import resetPassword from '@/services/auth/auth.reset-password'

@@ -2,10 +2,11 @@ module.exports = {
 	root: true,
 	plugins: ['stylelint-order'],
 	extends: [
+		'stylelint-config-standard-scss', // Configuration for SCSS files.
 		'stylelint-config-standard', // The standard shareable config for Stylelint
 		'stylelint-config-html/html', // The shareable html config for Stylelint.
 		'stylelint-config-html/vue', // The shareable vue config for Stylelint.
-		'stylelint-config-recess-order', // Use the clean order for properties
+		'stylelint-config-recess-order', // Use the clean order for properties.
 	],
 	rules: {
 		// Disable low-specificity selectors after overriding high-specificity selectors
@@ -62,15 +63,6 @@ module.exports = {
 				'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['deep', 'global'] }],
 				// Disable unknown pseudo-element selectors
 				'selector-pseudo-element-no-unknown': [true, { ignorePseudoElements: ['v-deep', 'v-global', 'v-slotted'] }],
-			},
-		},
-		{
-			files: ['*.less', '**/*.less'],
-			customSyntax: 'postcss-less',
-			extends: ['stylelint-config-standard-less'],
-			rules: {
-				'less/color-no-invalid-hex': true,
-				'less/no-duplicate-variables': true,
 			},
 		},
 	],

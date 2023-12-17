@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/store/modules/auth'
-import '@nordhealth/components/lib/Divider'
 
 const router = useRouter()
 const authStore = useAuthStore()

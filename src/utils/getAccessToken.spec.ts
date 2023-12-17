@@ -1,5 +1,4 @@
 import type { RouteLocationNormalizedLoaded } from 'vue-router'
-import type { UserAttributes } from '@supabase/supabase-js'
 import type { Mock } from 'vitest'
 import getAccessToken from './getAccessToken'
 
@@ -13,7 +12,7 @@ describe('getAccessToken', () => {
 
 		const result = getAccessToken()
 
-		assert.equal(result, 'myAccessToken' as UserAttributes)
+		expect(result).toEqual('myAccessToken')
 	})
 
 	it('should return undefined if the hash does not contain an access token', () => {
@@ -23,7 +22,7 @@ describe('getAccessToken', () => {
 
 		const result = getAccessToken()
 
-		assert.equal(result, undefined)
+		expect(result).toBeUndefined()
 	})
 
 	it('should return undefined if the hash is empty', () => {
@@ -33,7 +32,7 @@ describe('getAccessToken', () => {
 
 		const result = getAccessToken()
 
-		assert.equal(result, undefined)
+		expect(result).toBeUndefined()
 	})
 
 	it('should handle multiple key-value pairs in the hash', () => {
@@ -43,7 +42,7 @@ describe('getAccessToken', () => {
 
 		const result = getAccessToken()
 
-		assert.equal(result, 'myAccessToken' as UserAttributes)
+		expect(result).toEqual('myAccessToken')
 	})
 
 	it('should handle the case when the hash is undefined', () => {
@@ -51,6 +50,6 @@ describe('getAccessToken', () => {
 
 		const result = getAccessToken()
 
-		assert.equal(result, undefined)
+		expect(result).toBeUndefined()
 	})
 })

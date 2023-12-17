@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import forgotPassword from '@/services/auth/auth.forgot-password'
 import type { ForgotPasswordSchemaErrorsType, ForgotPasswordSchemaType } from '@/schemas/auth'
 import { ForgotPasswordSchema } from '@/schemas/auth'

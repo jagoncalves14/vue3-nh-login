@@ -35,4 +35,7 @@ export default defineConfig({
 	rules: [
 		['text-accent', { color: 'var(--n-color-accent)' }],
 	],
+	shortcuts: [
+		{ 'plain-link': 'no-underline text-accent hover:text-accent hover:brightness-75' },
+	],
 })
