@@ -1,3 +1,9 @@
+<script setup lang="ts">
+useHead({
+	title: 'Nordhealth DS — Sign up',
+})
+</script>
+
 <template>
 	<AuthForm
 		sign-up

@@ -1,4 +1,5 @@
 import { resolve } from 'node:path'
+import type { ConfigEnv } from 'vite'
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import Icons from 'unplugin-icons/vite'
@@ -9,14 +10,12 @@ import UnoCSS from 'unocss/vite'
 import presetAttributify from '@unocss/preset-attributify'
 import presetIcons from '@unocss/preset-icons'
 import presetUno from '@unocss/preset-uno'
-
-// loader helpers
+import { unheadVueComposablesImports } from '@unhead/vue'
 import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 
 const iconDirectory = resolve(__dirname, 'icons')
 
-export default ({ mode }) => {
-	// eslint-disable-next-line node/prefer-global/process
+export default ({ mode }: ConfigEnv) => {
 	const { VITE_PORT, VITE_BASE_URL } = loadEnv(mode, process?.cwd())
 
 	return defineConfig({
@@ -49,7 +48,13 @@ export default ({ mode }) => {
 				],
 			}),
 			AutoImport({
-				imports: ['vue', 'vue-router', 'pinia', 'vitest'],
+				imports: [
+					'vue',
+					'vue-router',
+					'pinia',
+					'vitest',
+					unheadVueComposablesImports,
+				],
 				resolvers: [
 					IconsResolver({
 						prefix: 'Icon',
@@ -87,7 +92,7 @@ export default ({ mode }) => {
 		},
 		server: {
 			// The port number
-			port: VITE_PORT,
+			port: Number(VITE_PORT),
 			// Listen on all addresses
 			host: '0.0.0.0',
 			// Whether to automatically open the browser when the service starts

@@ -17,6 +17,7 @@ export default antfu(
 			'@typescript-eslint/semi': 'off',
 			'curly': ['error', 'multi-line'],
 			'style/brace-style': ['error', '1tbs'],
+			'node/prefer-global/process': 'off',
 			'vue/no-deprecated-slot-attribute': 'off',
 			'vue/singleline-html-element-content-newline': 'off',
 			'vue/multiline-html-element-content-newline': 'off',

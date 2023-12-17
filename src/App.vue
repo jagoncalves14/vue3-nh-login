@@ -4,6 +4,10 @@ import { supabase } from '@/utils/supabase'
 import { useAuthStore } from '@/store/modules/auth'
 import '@nordhealth/components/lib/Button'
 
+useHead({
+	title: 'Nordhealth DS',
+})
+
 const authStore = useAuthStore()
 const { session } = storeToRefs(authStore)
 

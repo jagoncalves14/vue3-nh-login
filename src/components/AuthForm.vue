@@ -133,6 +133,7 @@ async function handleSubmit() {
 								:error="formErrors?.password?._errors"
 							/>
 							<RouterLink
+								v-if="!props.signUp"
 								to="/forgot-password"
 								class="absolute end-0 top-0 text-xs leading-6 no-underline"
 							>

@@ -24,7 +24,15 @@ const asyncRouterList = [...routeModuleList]
 // Store fixed routes
 const defaultRouterList: readonly RouteRecordRaw[] = []
 
-const routes = [...defaultRouterList, ...asyncRouterList]
+const routes = [
+	...defaultRouterList,
+	...asyncRouterList,
+	{
+		path: '/:pathMatch(.*)*',
+		name: 'ErrorView',
+		component: () => import('@/views/NotFound.vue'),
+	},
+]
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),

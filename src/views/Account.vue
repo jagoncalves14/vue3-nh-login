@@ -6,6 +6,10 @@ const router = useRouter()
 const authStore = useAuthStore()
 const { session } = storeToRefs(authStore)
 
+useHead({
+	title: 'Nordhealth DS — Account',
+})
+
 const isLoading = ref(false)
 const userEmail = ref(session?.value?.user?.email)
 
@@ -52,22 +56,23 @@ async function handleDeleteUser() {
 </script>
 
 <template>
-	<main class="n-stack-horizontal mx-auto h-full max-w-screen-xl">
-		<nord-card class="my-10" padding="l">
+	<main class="n-stack-horizontal mx-auto h-full w-full max-w-screen-md">
+		<nord-card class="md:my-10" padding="l">
 			<nord-stack class="stack" direction="vertical" align-items="stretch">
-				<div class="px-10 py-5">
-					<h1>Account</h1>
+				<div class="py-5 md:px-10">
+					<h1>Account  ⛄️</h1>
 				</div>
-				<nord-card gap="l" direction="vertical" padding="l" class="px-10 pb-10">
+				<nord-card gap="l" direction="vertical" padding="l" class="pb-10 md:px-10">
 					<div slot="header">Details</div>
 					<nord-stack gap="l" direction="vertical" align-items="stretch">
 						<p class="n-color-text-weaker">Check your account details here.</p>
 						<nord-stack gap="m" direction="vertical" align-items="stretch">
 							<nord-input
+								class="inline-block"
 								:value="userEmail"
-								readonly
+
 								label="Email"
-								expand
+								expand readonly
 								name="email"
 								autocomplete="email"
 								type="email"
@@ -77,9 +82,10 @@ async function handleDeleteUser() {
 							<div class="py-5">
 								<nord-divider />
 							</div>
+
 							<nord-stack class="stack" direction="vertical" align-items="stretch">
 								<h3 slot="header">Delete your account</h3>
-								<p class="n-color-text-weaker">If you want to permanently delete this account and all of its data, you can do that do that below.</p>
+								<p class="n-color-text-weaker">If you want to permanently delete this account and all of its data, click the button below.</p>
 								<nord-button variant="danger" type="submit" size="m" @click="handleDeleteClick">Delete account</nord-button>
 							</nord-stack>
 						</nord-stack>

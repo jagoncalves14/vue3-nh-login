@@ -1,4 +1,3 @@
-/* eslint-disable node/prefer-global/process */
 import { defineConfig } from '@playwright/test'
 
 const WEB_SERVER_PORT = 4173

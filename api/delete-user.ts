@@ -1,4 +1,3 @@
-/* eslint-disable node/prefer-global/process */
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { createClient } from '@supabase/supabase-js'
 import dotenv from 'dotenv'

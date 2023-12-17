@@ -3,6 +3,10 @@ import forgotPassword from '@/services/auth/auth.forgot-password'
 import type { ForgotPasswordSchemaErrorsType, ForgotPasswordSchemaType } from '@/schemas/auth'
 import { ForgotPasswordSchema } from '@/schemas/auth'
 
+useHead({
+	title: 'Nordhealth DS — Forgot password',
+})
+
 const isLoading = ref(false)
 
 const formErrors = ref<ForgotPasswordSchemaErrorsType>(null)
